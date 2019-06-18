@@ -9,8 +9,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/github_account/react-native-tsc-printing.git",
-    "baseUrl": "https://github.com/github_account/react-native-tsc-printing"
+    "url": "git+https://github.com/demonhunt/react-native-tsc-printing.git",
+    "baseUrl": "https://github.com/demonhunt/react-native-tsc-printing"
   },
   "keywords": [
     "react-native"
