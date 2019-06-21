@@ -45,12 +45,15 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 	}
 
 	@ReactMethod
-	public void printTote(ReadableMap config, int a, int b, String size, Promise promise) {
+	public void printTote(ReadableMap config, ReadableMap data, Promise promise) {
 		TscWifiActivity instance = new TscWifiActivity();
 
 		try {
+			int a = data.getInt("fromId");
+			int b = data.getInt("toId");
+			String size = data.getString("size");
 			prepareLabel(instance, config);
-			initializeTote(instance,a, b, size);
+			initializeTote(instance, a, b, size);
 			promise.resolve("");
 		} catch (Exception e) {
 			promise.reject(e);
@@ -59,12 +62,12 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 		instance.closeport(5000);
 	}
 
-	public void initializeTote(TscWifiActivity instance,int a, int b, String size) {
+	public void initializeTote(TscWifiActivity instance, int a, int b, String size) {
 		try {
-			if(heightRatio<1){
+			if (heightRatio < 1) {
 				numLabel = 3.0;
 			}
-			String[] block = {"","","",""};
+			String[] block = { "", "", "", "" };
 			int count = 0;
 			for (int i = a; i <= b; i++) {
 				block[count] = size + "-" + Integer.toString(i);
