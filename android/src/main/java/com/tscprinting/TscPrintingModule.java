@@ -96,16 +96,8 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 				
 				instance.sendcommand(String.format("BOX %f,%f,%f,%f,12,10\n", 12 * wRatio, x * hRatio,
 						790 * wRatio, y * hRatio));
-
 				instance.sendcommand(String.format("BLOCK %f,%f,%f,%f,\"TAHOMAB.TTF\",0,70,70,5,0,1,\"%s\"\n ", 60 * wRatio,
 						text * hRatio,450 * wRatio,120*hRatio, block[i]));
-
-				// String.format("BLOCK %f,%f,%f,%f,\"TAHOMA.TTF\",0,%f,%f,%f,0,1,\"%s\"\n ",
-				// 420 * widthRatio, 578 * heightRatio, 380 * widthRatio, 60 * heightRatio, 9 * widthRatio,
-				// 9 * widthRatio, 5 * widthRatio, a.getString("province"))
-
-				// instance.sendcommand(String.format("BLOCK %f,%f,%f,%f\"G.FNT\",0,10,10,10,0,1,\"%s\" \n ", 5.0,
-				// 		5.0,400*wRatio,150*hRatio,"sds"));
 				instance.sendcommand(String.format("QRCODE %f,%f,H,%f,M,0,M2, \"S%s\"\n", 555 * wRatio,
 						qrcode * hRatio, 10 * hRatio, block[i]));
 				x += 305 * wRatio;
@@ -169,7 +161,6 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 		}
 	}
 
-
 	@ReactMethod
 	public void printLabel(ReadableMap config, ReadableMap data, Promise promise) {
 		TscWifiActivity instance = new TscWifiActivity();
@@ -189,24 +180,24 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 
 	public void printContentLabel(TscWifiActivity instance, ReadableMap a) {
 		try {
-			String content = "- Sách, văn hoá phẩm và văn phòng phẩm", header = "Fahasa.com - 1900 636467";
+			String content = "- Sách, văn hoá phẩm và văn phòng phẩm";
+
+			instance.sendcommand(String.format("PUTBMP %f,%f,\"test2.bmp\"\n", 300 * widthRatio, 55 * heightRatio));
 
 			instance.sendcommand(String.format("QRCODE %f,%f,H,%f,M,0,M2 ,\"S%s\"\n", 60 * widthRatio, 45 * heightRatio,
 					9 * widthRatio, a.getString("deliveryId")));
+
 			instance.sendcommand(String.format("QRCODE %f,%f,H,%f,M,0,M2 ,\"S%s\"\n", 560 * widthRatio,
-					965 * heightRatio, 7 * widthRatio, a.getString("orderId").replace("_", "")));
+					935 * heightRatio, 8 * widthRatio, a.getString("orderId").replace("_", "")));
 
 			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMA.TTF\",0,%f,%f,1,\"%s\" \n ", 300 * widthRatio,
-					45 * heightRatio, 10 * heightRatio, 10 * heightRatio, header));
-
-			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMA.TTF\",0,%f,%f,1,\"%s\" \n ", 300 * widthRatio,
-					85 * heightRatio, 10 * heightRatio, 10 * heightRatio, a.getString("date")));
+					135 * heightRatio, 10 * heightRatio, 10 * heightRatio, a.getString("date")));
 
 			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"%s\" \n ", 300 * widthRatio,
-					125 * heightRatio, 10 * heightRatio, 10 * heightRatio, a.getString("orderId")));
+					175 * heightRatio, 10 * heightRatio, 10 * heightRatio, a.getString("orderId")));
                     
 			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMA.TTF\",0,%f,%f,1,\"%s\" \n ", 300 * widthRatio,
-					165 * heightRatio, 10 * heightRatio, 10 * heightRatio, a.getString("deliveryPartner")));
+					215 * heightRatio, 10 * heightRatio, 10 * heightRatio, a.getString("deliveryPartner")));
                     
 			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"Người nhận:   \" \n ",
 					60 * widthRatio, 320 * heightRatio, 11 * heightRatio, 11 * heightRatio));
@@ -215,54 +206,55 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 					320 * heightRatio, 11 * heightRatio, 11 * heightRatio, a.getString("shippingName")));
                     
 			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"SĐT:    \" \n ", 60 * widthRatio,
-					380 * heightRatio, 11 * heightRatio, 11 * heightRatio));
+					360 * heightRatio, 11 * heightRatio, 11 * heightRatio));
                     
 			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMA.TTF\",0,%f,%f,1,\"%s\" \n ", 220 * widthRatio,
-					380 * heightRatio, 11 * heightRatio, 11 * heightRatio, a.getString("shippingPhone")));
+					360 * heightRatio, 11 * heightRatio, 11 * heightRatio, a.getString("shippingPhone")));
                     
 			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"Địa chỉ:\" \n ", 60 * widthRatio,
-					440 * heightRatio, 10 * heightRatio, 10 * heightRatio));
+					400 * heightRatio, 10 * heightRatio, 10 * heightRatio));
                     
 			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"Quận/Huyện: \" \n ",
-					60 * widthRatio, 530 * heightRatio, 9 * heightRatio, 9 * heightRatio));
+					520 * widthRatio, 320 * heightRatio, 11 * heightRatio, 11
+					 * heightRatio));
                     
 			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"Tỉnh/TP: \" \n ",
-					420 * widthRatio, 530 * heightRatio, 9 * heightRatio, 9 * heightRatio));
+					520 * widthRatio, 490 * heightRatio, 11 * heightRatio, 11 * heightRatio));
                     
 			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"ĐƯỢC XEM HÀNG\" \n ",
-					80 * widthRatio, 680 * heightRatio, 11 * heightRatio, 11 * heightRatio));
+					520 * widthRatio, 690 * heightRatio, 11 * heightRatio, 11 * heightRatio));
                     
 			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"Tiền thu hộ: \" \n ",
-					420 * widthRatio, 640 * heightRatio, 9 * heightRatio, 9 * heightRatio));
+					60 * widthRatio, 660 * heightRatio, 11 * heightRatio, 11 * heightRatio));
                     
-			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMA.TTF\",0,%f,%f,1,\"%s\" \n ", 420 * widthRatio,
-					680 * heightRatio, 18 * heightRatio, 12 * heightRatio, a.getString("total")));
+			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMA.TTF\",0,%f,%f,1,\"%s\" \n ", 60 * widthRatio,
+					720 * heightRatio, 18 * heightRatio, 12 * heightRatio, a.getString("total")));
                     
 			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"Ghi chú: \" \n ",
-					60 * widthRatio, 770 * heightRatio, 10 * heightRatio, 10 * heightRatio));
+					60 * widthRatio, 800 * heightRatio, 11 * heightRatio, 11 * heightRatio));
                     
 			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"Nội dung hàng hoá: \" \n ",
-					60 * widthRatio, 970 * heightRatio, 10 * heightRatio, 10 * heightRatio));
+					60 * widthRatio, 950 * heightRatio, 10 * heightRatio, 10 * heightRatio));
 
 
 			instance.sendcommand(String.format("BLOCK %f,%f,%f,%f,\"TAHOMA.TTF\",0,%f,%f,%f,0,1,\"%s\"\n ",
-					230 * widthRatio, 345 * heightRatio, 560 * widthRatio, 180 * heightRatio, 10 * widthRatio,
-					10 * widthRatio, 10 * widthRatio, a.getString("shippingStreet")));
+					60 * widthRatio, 440 * heightRatio, 400 * widthRatio, 180 * heightRatio, 10 * widthRatio,
+					10 * widthRatio, 5 * widthRatio, a.getString("shippingStreet")));
                     
 			instance.sendcommand(String.format("BLOCK %f,%f,%f,%f,\"TAHOMA.TTF\",0,%f,%f,%f,0,1,\"%s\" \n ",
-					60 * widthRatio, 480 * heightRatio, 380 * widthRatio, 60 * heightRatio, 9 * widthRatio,
+					520 * widthRatio, 370 * heightRatio, 380 * widthRatio, 60 * heightRatio, 9 * widthRatio,
 					9 * widthRatio, 5 * widthRatio, a.getString("district")));
                     
 			instance.sendcommand(String.format("BLOCK %f,%f,%f,%f,\"TAHOMA.TTF\",0,%f,%f,%f,0,1,\"%s\" \n ",
-					420 * widthRatio, 578 * heightRatio, 380 * widthRatio, 60 * heightRatio, 9 * widthRatio,
+					520 * widthRatio, 540 * heightRatio, 380 * widthRatio, 60 * heightRatio, 9 * widthRatio,
 					9 * widthRatio, 5 * widthRatio, a.getString("province")));
                     
 			instance.sendcommand(String.format("BLOCK %f,%f,%f,%f,\"TAHOMA.TTF\",0,%f,%f,%f,0,1,\"%s\"\n ",
-					60 * widthRatio, 815 * heightRatio, 720 * widthRatio, 150 * heightRatio, 10 * widthRatio,
+					220 * widthRatio, 800 * heightRatio, 500 * widthRatio, 120 * heightRatio, 10 * widthRatio,
 					10 * widthRatio, 5 * widthRatio, a.getString("note")));
                     
 			instance.sendcommand(String.format("BLOCK %f,%f,%f,%f,\"TAHOMA.TTF\",0,%f,%f,%f,0,1,\"%s\"\n ",
-					60 * widthRatio, 1020 * heightRatio, 450 * widthRatio, 200 * heightRatio, 10 * widthRatio,
+					60 * widthRatio, 1000 * heightRatio, 450 * widthRatio, 200 * heightRatio, 10 * widthRatio,
 					10 * widthRatio, 5 * widthRatio, content));
 		} catch (Exception e) {
 			Log.v("ReactNative", e.getMessage());
