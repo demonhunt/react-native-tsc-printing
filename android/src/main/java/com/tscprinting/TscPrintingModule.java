@@ -238,7 +238,7 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 					60 * widthRatio, 950 * heightRatio, 10 * heightRatio, 10 * heightRatio));
 
 			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"Được giao bởi: \" \n ",
-					60 * widthRatio, 1100 * heightRatio, 11 * heightRatio, 11 * heightRatio));
+					60 * widthRatio, 1100 * heightRatio, 10 * heightRatio, 10 * heightRatio));
 
 			instance.sendcommand(String.format("BLOCK %f,%f,%f,%f,\"TAHOMA.TTF\",0,%f,%f,%f,0,1,\"%s\"\n ",
 					60 * widthRatio, 440 * heightRatio, 400 * widthRatio, 180 * heightRatio, 10 * widthRatio,
@@ -283,14 +283,14 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 				break;
 			case "Fahasa":
 			case "Fahasa_SD":
-				command = String.format("PUTBMP %f,%f,\"%s\"\n", 270 * widthRatio, 1080 * heightRatio, fFooter);
+				command = String.format("PUTBMP %f,%f,\"%s\"\n", 270 * widthRatio, 1100 * heightRatio, fFooter);
 				break;
 			default:
 				command = String.format("TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"%s\" \n ", 300 * widthRatio,
 						1080 * heightRatio, 15 * widthRatio, 25 * heightRatio, dPartner);
 			}
 			instance.sendcommand(command);
-			instance.sendcommand(String.format("PUTBMP %f,%f,\"%s\"\n", 270 * widthRatio, 55 * heightRatio, fHeader));
+			instance.sendcommand(String.format("PUTBMP %f,%f,\"%s\"\n", 300 * widthRatio, 55 * heightRatio, fHeader));
 			// Log.v("ReactNative", fahasa);
 
 
