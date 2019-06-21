@@ -182,11 +182,11 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 		try {
 			String content = "- Sách, văn hoá phẩm và văn phòng phẩm";
 
-			instance.sendcommand(String.format("QRCODE %f,%f,H,%f,M,0,M2 ,\"S%s\"\n", 60 * widthRatio, 45 * heightRatio,
+			instance.sendcommand(String.format("QRCODE %f,%f,H,%f,M,0,M2 ,\"S%s\"\n", 60 * widthRatio, 50 * heightRatio,
 					9 * widthRatio, a.getString("deliveryId")));
 
 			instance.sendcommand(String.format("QRCODE %f,%f,H,%f,M,0,M2 ,\"S%s\"\n", 560 * widthRatio,
-					935 * heightRatio, 8 * widthRatio, a.getString("orderId").replace("_", "")));
+					940 * heightRatio, 8 * widthRatio, a.getString("orderId").replace("_", "")));
 
 			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMA.TTF\",0,%f,%f,1,\"%s\" \n ", 300 * widthRatio,
 					135 * heightRatio, 10 * heightRatio, 10 * heightRatio, a.getString("date")));
@@ -278,6 +278,7 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 			case "Speedlink":
 				command = String.format("PUTBMP %f,%f,\"%s\"\n", 270 * widthRatio, 1080 * heightRatio, speedlink);
 				break;
+			case "Fahasa":
 			case "Fahasa_SD":
 				command = String.format("PUTBMP %f,%f,\"%s\"\n", 270 * widthRatio, 1080 * heightRatio, fFooter);
 				break;
