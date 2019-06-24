@@ -27,7 +27,7 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 		return "TscPrinting";
 	}
 
-	public void prepareLabel(TscWifiActivity instance, ReadableMap config) {
+	public void prepareLabel(TscWifiActivity instance, ReadableMap config) throws Exception {
 		try {
 			String ip = config.getString("ip");
 			heightRatio = config.getDouble("heightRatio");
@@ -62,7 +62,7 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 		instance.closeport(5000);
 	}
 
-	public void initializeTote(TscWifiActivity instance, int a, int b, String size) {
+	public void initializeTote(TscWifiActivity instance, int a, int b, String size)  throws Exception {
 		try {
 			if (heightRatio < 1) {
 				numLabel = 3.0;
@@ -87,7 +87,7 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 		}
 	}
 
-	public void proceedPrintMultiLabel(TscWifiActivity instance, String[] block) {
+	public void proceedPrintMultiLabel(TscWifiActivity instance, String[] block) throws Exception  {
 		String content = "";
 		instance.sendcommand("CLS\n");
 		int x = 22, y = 280, text = 80, qrcode = 50;
@@ -129,7 +129,7 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 		instance.closeport(5000);
 	}
 
-	public void initializeShelf(TscWifiActivity instance, ReadableMap data) {
+	public void initializeShelf(TscWifiActivity instance, ReadableMap data) throws Exception  {
 		try {
 			if (heightRatio < 1) {
 				numLabel = 3.0;
@@ -181,7 +181,7 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 	}
 
 
-	public void printContentLabel(TscWifiActivity instance, ReadableMap a) {
+	public void printContentLabel(TscWifiActivity instance, ReadableMap a)  throws Exception {
 		try {
 			String content = "- Sách, văn hoá phẩm và văn phòng phẩm";
 
@@ -300,7 +300,7 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 		}
 	}
 
-	public void printLayoutLabel(TscWifiActivity instance, ReadableMap a) {
+	public void printLayoutLabel(TscWifiActivity instance, ReadableMap a) throws Exception  {
 		instance.sendcommand(String.format("BOX %f,%f,%f,%f,8,10\n", 42 * widthRatio, 32 * heightRatio,
 				790 * widthRatio, 1185 * heightRatio));
 
