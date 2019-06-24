@@ -28,7 +28,6 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 	}
 
 	public void prepareLabel(TscWifiActivity instance, ReadableMap config) throws Exception {
-		try {
 			String ip = config.getString("ip");
 			heightRatio = config.getDouble("heightRatio");
 			widthRatio = config.getDouble("widthRatio");
@@ -39,9 +38,6 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 			instance.sendcommand("CLS\n");
 			instance.sendcommand("CODEPAGE UTF-8\n");
 			instance.sendcommand("DIRECTION 1\n");
-		} catch (Exception e) {
-			Log.v("ReactNative", e.getMessage());
-		}
 	}
 
 	@ReactMethod
@@ -63,7 +59,6 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 	}
 
 	public void initializeTote(TscWifiActivity instance, int a, int b, String size)  throws Exception {
-		try {
 			if (heightRatio < 1) {
 				numLabel = 3.0;
 			}
@@ -82,9 +77,6 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 					proceedPrintMultiLabel(instance,block);
 				}
 			}
-		} catch (Exception e) {
-
-		}
 	}
 
 	public void proceedPrintMultiLabel(TscWifiActivity instance, String[] block) throws Exception  {
@@ -130,7 +122,6 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 	}
 
 	public void initializeShelf(TscWifiActivity instance, ReadableMap data) throws Exception  {
-		try {
 			if (heightRatio < 1) {
 				numLabel = 3.0;
 			}
@@ -159,9 +150,6 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 			if (count != 0) {
 				proceedPrintMultiLabel(instance, label);
 			}
-		} catch (Exception e) {
-			Log.v("ReactNative", e.getMessage());
-		}
 	}
 
 	@ReactMethod
@@ -182,7 +170,6 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 
 
 	public void printContentLabel(TscWifiActivity instance, ReadableMap a)  throws Exception {
-		try {
 			String content = "- Sách, văn hoá phẩm và văn phòng phẩm";
 
 			instance.sendcommand(String.format("QRCODE %f,%f,H,%f,M,0,M2 ,\"S%s\"\n", 60 * widthRatio, 50 * heightRatio,
@@ -292,12 +279,6 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 			instance.sendcommand(command);
 			instance.sendcommand(String.format("PUTBMP %f,%f,\"%s\"\n", 300 * widthRatio, 55 * heightRatio, fHeader));
 			// Log.v("ReactNative", fahasa);
-
-
-		} catch (Exception e) {
-			Log.v("ReactNative", e.getMessage());
-
-		}
 	}
 
 	public void printLayoutLabel(TscWifiActivity instance, ReadableMap a) throws Exception  {
