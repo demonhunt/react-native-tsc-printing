@@ -186,7 +186,7 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 			String content = "- Sách, văn hoá phẩm và văn phòng phẩm";
 
 			instance.sendcommand(String.format("QRCODE %f,%f,H,%f,M,0,M2 ,\"S%s\"\n", 60 * widthRatio, 50 * heightRatio,
-					9 * widthRatio, a.getString("deliveryId")));
+					8 * widthRatio, a.getString("deliveryId")));
 
 			instance.sendcommand(String.format("QRCODE %f,%f,H,%f,M,0,M2 ,\"S%s\"\n", 560 * widthRatio,
 					940 * heightRatio, 8 * widthRatio, a.getString("orderId").replace("_", "")));
@@ -268,12 +268,12 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 
 			String fHeader = widthRatio >= 1 ? "fhbig.bmp" : "fhsmall.bmp";
 			String fFooter = widthRatio >= 1 ? "ffbig.bmp" : "ffsmall.bmp";
-			String speedlink = widthRatio >= 1 ? "splbig.bmp" : "spbsmall.bmp";
+			String speedlink = widthRatio >= 1 ? "splbig.bmp" : "splsmall.bmp";
 			String ninja = widthRatio >= 1 ? "ninjabig.bmp" : "ninjasmall.bmp";
 			String kerry = widthRatio >= 1 ? "kerrybig.bmp" : "kerrysmall.bmp";
 			switch (dPartner) {
 			case "Ninja Van":
-				command = String.format("PUTBMP %f,%f,\"%s\"\n", 270 * widthRatio, 1080 * heightRatio, ninja);
+				command = String.format("PUTBMP %f,%f,\"%s\"\n", 270 * widthRatio, 1000 * heightRatio, ninja);
 				break;
 			case "Kerry":
 				command = String.format("PUTBMP %f,%f,\"%s\"\n", 270 * widthRatio, 1050 * heightRatio, kerry);
