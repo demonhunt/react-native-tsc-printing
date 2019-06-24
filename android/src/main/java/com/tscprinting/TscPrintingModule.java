@@ -112,7 +112,7 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 		try {
 			prepareLabel(instance, config);
 			initializeShelf(instance, data);
-			promise.resolve("success");
+			promise.resolve("success2");
 
 		} catch (Exception e) {
 			promise.reject(e);
@@ -188,15 +188,13 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 					215 * heightRatio, 10 * heightRatio, 10 * heightRatio, a.getString("deliveryPartner")));
                     
 			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"Người nhận:   \" \n ",
-					60 * widthRatio, 320 * heightRatio, 11 * heightRatio, 11 * heightRatio));
-                    
-			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMA.TTF\",0,%f,%f,1,\"%s\" \n ", 220 * widthRatio,
-					320 * heightRatio, 11 * heightRatio, 11 * heightRatio, a.getString("shippingName")));
+					60 * widthRatio, 320 * heightRatio, 10 * heightRatio, 10 * heightRatio));
+   
                     
 			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"SĐT:    \" \n ", 60 * widthRatio,
 					360 * heightRatio, 11 * heightRatio, 11 * heightRatio));
                     
-			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMA.TTF\",0,%f,%f,1,\"%s\" \n ", 220 * widthRatio,
+			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMA.TTF\",0,%f,%f,1,\"%s\" \n ", 230 * widthRatio,
 					360 * heightRatio, 11 * heightRatio, 11 * heightRatio, a.getString("shippingPhone")));
                     
 			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"Địa chỉ:\" \n ", 60 * widthRatio,
@@ -210,7 +208,7 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 					520 * widthRatio, 490 * heightRatio, 11 * heightRatio, 11 * heightRatio));
                     
 			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"ĐƯỢC XEM HÀNG\" \n ",
-					520 * widthRatio, 690 * heightRatio, 11 * heightRatio, 11 * heightRatio));
+					520 * widthRatio, 690 * heightRatio, 10 * heightRatio, 10 * heightRatio));
                     
 			instance.sendcommand(String.format("TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"Tiền thu hộ: \" \n ",
 					60 * widthRatio, 660 * heightRatio, 11 * heightRatio, 11 * heightRatio));
@@ -234,6 +232,10 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 			instance.sendcommand(String.format("BLOCK %f,%f,%f,%f,\"TAHOMA.TTF\",0,%f,%f,%f,0,1,\"%s\" \n ",
 					520 * widthRatio, 370 * heightRatio, 380 * widthRatio, 60 * heightRatio, 9 * widthRatio,
 					9 * widthRatio, 5 * widthRatio, a.getString("district")));
+
+					instance.sendcommand(String.format("BLOCK %f,%f,%f,%f,\"TAHOMA.TTF\",0,%f,%f,%f,0,1,\"%s\" \n ",
+					230 * widthRatio, 320 * heightRatio, 250 * widthRatio, 50 * heightRatio, 11 * heightRatio,
+					11 * heightRatio, 5 * widthRatio, a.getString("shippingName")));
                     
 			instance.sendcommand(String.format("BLOCK %f,%f,%f,%f,\"TAHOMA.TTF\",0,%f,%f,%f,0,1,\"%s\" \n ",
 					520 * widthRatio, 540 * heightRatio, 380 * widthRatio, 60 * heightRatio, 9 * widthRatio,
@@ -260,23 +262,26 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 			String kerry = widthRatio >= 1 ? "kerrybig.bmp" : "kerrysmall.bmp";
 			switch (dPartner) {
 			case "Ninja Van":
-				command = String.format("PUTBMP %f,%f,\"%s\"\n", 270 * widthRatio, 1000 * heightRatio, ninja);
+				command = String.format("PUTBMP %f,%f,\"%s\"\n", 270 * widthRatio, 1020 * heightRatio, ninja);
 				break;
 			case "Kerry":
 				command = String.format("PUTBMP %f,%f,\"%s\"\n", 270 * widthRatio, 1050 * heightRatio, kerry);
 				break;
 			case "Speedlink":
-				command = String.format("PUTBMP %f,%f,\"%s\"\n", 270 * widthRatio, 1080 * heightRatio, speedlink);
+				command = String.format("PUTBMP %f,%f,\"%s\"\n", 270 * widthRatio, 1100 * heightRatio, speedlink);
 				break;
 			case "Fahasa":
 			case "Fahasa_SD":
-				command = String.format("PUTBMP %f,%f,\"%s\"\n", 270 * widthRatio, 1100 * heightRatio, fFooter);
-				break;
-			default:
-				command = String.format("TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"%s\" \n ", 300 * widthRatio,
-						1080 * heightRatio, 15 * widthRatio, 25 * heightRatio, dPartner);
-			}
-			instance.sendcommand(command);
+			command = String.format("PUTBMP %f,%f,\"%s\"\n", 270 * widthRatio, 1080 * heightRatio, fFooter);
+			break;
+		default:
+			command = String.format("BLOCK %f,%f,%f,%f,\"TAHOMAB.TTF\",0,%f,%f,%f,0,1,\"%s\"\n ", 280 * widthRatio,
+			1095 * heightRatio, 250 * widthRatio, 60 * heightRatio, 15 * widthRatio, 15 * widthRatio,
+					5 * widthRatio, dPartner);
+			// command = String.format("TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"%s\" \n ", 300 * widthRatio,
+			// 		1080 * heightRatio, 15 * widthRatio, 15 * heightRatio, dPartner);
+		}
+		instance.sendcommand(command);
 			instance.sendcommand(String.format("PUTBMP %f,%f,\"%s\"\n", 300 * widthRatio, 55 * heightRatio, fHeader));
 			// Log.v("ReactNative", fahasa);
 	}
