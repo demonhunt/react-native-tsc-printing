@@ -219,9 +219,6 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 		instance.sendcommand(String.format(Locale.US,"TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"Nội dung hàng hoá: \" \n ",
 				60 * widthRatio, 950 * heightRatio, 10 * heightRatio, 10 * heightRatio));
 
-		instance.sendcommand(String.format(Locale.US,"TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"Được giao bởi: \" \n ",
-				60 * widthRatio, 1100 * heightRatio, 10 * heightRatio, 10 * heightRatio));
-
 		instance.sendcommand(String.format(Locale.US,"BLOCK %f,%f,%f,%f,\"TAHOMA.TTF\",0,%f,%f,%f,0,1,\"%s\"\n ", 60 * widthRatio,
 				440 * heightRatio, 400 * widthRatio, 180 * heightRatio, 10 * widthRatio, 10 * widthRatio,
 				5 * widthRatio, a.getString("shippingStreet")));
@@ -257,30 +254,43 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 		String speedlink = widthRatio >= 1 ? "splbig.bmp" : "splsmall.bmp";
 		String ninja = widthRatio >= 1 ? "ninjabig.bmp" : "ninjasmall.bmp";
 		String kerry = widthRatio >= 1 ? "kerrybig.bmp" : "kerrysmall.bmp";
-		switch (dPartner) {
-		case "Ninja Van":
-		case "Ninja Van_SD":
-			command = String.format(Locale.US,"PUTBMP %f,%f,\"%s\"\n", 270 * widthRatio, 1020 * heightRatio, ninja);
-			break;
-		case "Kerry":
-		case "Kerry_SD":
-			command = String.format(Locale.US,"PUTBMP %f,%f,\"%s\"\n", 270 * widthRatio, 1050 * heightRatio, kerry);
-			break;
-		case "Speedlink":
-		case "Speedlink_SD":
-			command = String.format(Locale.US,"PUTBMP %f,%f,\"%s\"\n", 270 * widthRatio, 1100 * heightRatio, speedlink);
-			break;
-		case "Fahasa":
-		case "Fahasa_SD":
-			command = String.format(Locale.US,"PUTBMP %f,%f,\"%s\"\n", 270 * widthRatio, 1080 * heightRatio, fFooter);
-			break;
-		default:
-			command = String.format(Locale.US,"BLOCK %f,%f,%f,%f,\"TAHOMAB.TTF\",0,%f,%f,%f,0,1,\"%s\"\n ", 280 * widthRatio,
-					1095 * heightRatio, 250 * widthRatio, 60 * heightRatio, 15 * widthRatio, 15 * widthRatio,
-					5 * widthRatio, dPartner);
+
+		instance.sendcommand(
+				String.format(Locale.US, "PUTBMP %f,%f,\"%s\"\n", 300 * widthRatio, 55 * heightRatio, fHeader));
+
+		Boolean hasLogo = a.getBoolean("hasLogo");
+		if (hasLogo) {
+			switch (dPartner) {
+			case "Ninja Van":
+			case "Ninja Van_SD":
+				command = String.format(Locale.US, "PUTBMP %f,%f,\"%s\"\n", 270 * widthRatio, 1020 * heightRatio,
+						ninja);
+				break;
+			case "Kerry":
+			case "Kerry_SD":
+				command = String.format(Locale.US, "PUTBMP %f,%f,\"%s\"\n", 270 * widthRatio, 1050 * heightRatio,
+						kerry);
+				break;
+			case "Speedlink":
+			case "Speedlink_SD":
+				command = String.format(Locale.US, "PUTBMP %f,%f,\"%s\"\n", 270 * widthRatio, 1100 * heightRatio,
+						speedlink);
+				break;
+			case "Fahasa":
+			case "Fahasa_SD":
+				command = String.format(Locale.US, "PUTBMP %f,%f,\"%s\"\n", 270 * widthRatio, 1080 * heightRatio,
+						fFooter);
+				break;
+			default:
+				command = String.format(Locale.US, "BLOCK %f,%f,%f,%f,\"TAHOMAB.TTF\",0,%f,%f,%f,0,1,\"%s\"\n ",
+						280 * widthRatio, 1095 * heightRatio, 250 * widthRatio, 60 * heightRatio, 15 * widthRatio,
+						15 * widthRatio, 5 * widthRatio, dPartner);
+			}
+			instance.sendcommand(
+					String.format(Locale.US, "TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"Được giao bởi: \" \n ",
+							60 * widthRatio, 1100 * heightRatio, 10 * heightRatio, 10 * heightRatio));
+			instance.sendcommand(command);
 		}
-		instance.sendcommand(command);
-		instance.sendcommand(String.format(Locale.US,"PUTBMP %f,%f,\"%s\"\n", 300 * widthRatio, 55 * heightRatio, fHeader));
 	}
 
 	public void printLayoutLabel(TscWifiActivity instance, ReadableMap a) throws Exception {
