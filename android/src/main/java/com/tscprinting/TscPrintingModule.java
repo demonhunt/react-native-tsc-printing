@@ -10,6 +10,7 @@ import com.example.tscdll.TscWifiActivity;
 import com.facebook.react.bridge.Promise;
 import android.util.Log;
 import java.util.Arrays;
+import java.util.Locale;
 
 public class TscPrintingModule extends ReactContextBaseJavaModule {
 	private final ReactApplicationContext reactContext;
