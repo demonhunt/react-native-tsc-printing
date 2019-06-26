@@ -68,19 +68,19 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 		for (int i = a; i <= b; i++) {
 			block[count] = size + "-" + Integer.toString(i);
 			if (count == numLabel - 1) {
-				proceedPrintMultiLabel(instance, block);
+				proceedPrintMultiLabel(instance, block,false);
 				count = 0;
 				Arrays.fill(block, "");
 			} else {
 				count++;
 			}
 			if (i == b && count != 0) {
-				proceedPrintMultiLabel(instance, block);
+				proceedPrintMultiLabel(instance, block,false);
 			}
 		}
 	}
 
-	public void proceedPrintMultiLabel(TscWifiActivity instance, String[] block) throws Exception {
+	public void proceedPrintMultiLabel(TscWifiActivity instance, String[] block,Boolean hasArrow) throws Exception {
 		String content = "";
 		instance.sendcommand("CLS\n");
 		int x = 22, y = 280, text = 80, qrcode = 50;
@@ -90,12 +90,19 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 		for (int i = 0; i < numLabel; i++) {
 			if (block[i] != "") {
 
+				instance.sendcommand(String.format(Locale.US, "BOX %f,%f,%f,%f,12,10\n", 12 * wRatio, x * hRatio,
+						790 * wRatio, y * hRatio));
+				if (hasArrow) {
+					instance.sendcommand(String.format(Locale.US, "PUTBMP %f,%f,\"%s\"\n", 30 * wRatio,
+							text * hRatio - 20, "arrowup.bmp"));
+				}
+
 				instance.sendcommand(
-						String.format(Locale.US,"BOX %f,%f,%f,%f,12,10\n", 12 * wRatio, x * hRatio, 790 * wRatio, y * hRatio));
-				instance.sendcommand(String.format(Locale.US,"BLOCK %f,%f,%f,%f,\"TAHOMAB.TTF\",0,70,70,5,0,1,\"%s\"\n ",
-						60 * wRatio, text * hRatio, 450 * wRatio, 120 * hRatio, block[i]));
-				instance.sendcommand(String.format(Locale.US,"QRCODE %f,%f,H,%f,M,0,M2, \"S%s\"\n", 555 * wRatio, qrcode * hRatio,
-						10 * hRatio, block[i]));
+						String.format(Locale.US, "BLOCK %f,%f,%f,%f,\"TAHOMAB.TTF\",0,70,70,5,2,1,\"%s\"\n ",
+								120 * wRatio, text * hRatio+15, 390 * wRatio, 105 * hRatio, block[i]));
+
+				instance.sendcommand(String.format(Locale.US, "QRCODE %f,%f,H,%f,M,0,M2, \"S%s\"\n", 555 * wRatio,
+						qrcode * hRatio, 10 * hRatio, block[i]));
 				x += 305 * wRatio;
 				y += 305 * wRatio;
 				text += 305 * wRatio;
@@ -139,7 +146,7 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 					label[count] = "L" + Integer.toString(floor) + "-" + label[count];
 				}
 				if (count == numLabel - 1) {
-					proceedPrintMultiLabel(instance, label);
+					proceedPrintMultiLabel(instance, label,true);
 					count = 0;
 					Arrays.fill(label, "");
 				} else {
@@ -148,7 +155,7 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 			}
 		}
 		if (count != 0) {
-			proceedPrintMultiLabel(instance, label);
+			proceedPrintMultiLabel(instance, label,true);
 		}
 	}
 
@@ -257,6 +264,7 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 
 		instance.sendcommand(
 				String.format(Locale.US, "PUTBMP %f,%f,\"%s\"\n", 300 * widthRatio, 55 * heightRatio, fHeader));
+
 
 		Boolean hasLogo = a.getBoolean("hasLogo");
 		if (hasLogo) {
