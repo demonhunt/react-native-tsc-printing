@@ -55,7 +55,7 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 		} catch (Exception e) {
 			promise.reject(e);
 		}
-
+		instance.sendcommand("CLS\n");
 		instance.closeport(5000);
 	}
 
@@ -124,7 +124,7 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 		} catch (Exception e) {
 			promise.reject(e);
 		}
-
+		instance.sendcommand("CLS\n");
 		instance.closeport(5000);
 	}
 
@@ -172,6 +172,7 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 		} catch (Exception e) {
 			promise.reject(e);
 		}
+		instance.sendcommand("CLS\n");
 		instance.closeport(5000);
 	}
 
