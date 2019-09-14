@@ -201,10 +201,14 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
         public void printContentLabel(TscWifiActivity instance, ReadableMap a) throws Exception {
                 
                 String tiki = a.getString("tikiOrderId");
+                String content = "- Sách, văn hoá phẩm và văn phòng phẩm";
+                String noteTitle = "Nội dung hàng hoá:";
                 Integer noteWidth =( tiki!=null? 238:500);
 
 
                 if(tiki!=null){
+                        content = "- Note: Nhà bán hàng FAHASA trên TIKI";
+                        noteTitle = "Ghi chú giao hàng:";
                         instance.sendcommand(String.format(Locale.US,
                                         "TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"Mã đơn Tiki: \" \n ", 520 * widthRatio,
                                         800 * heightRatio, 11 * heightRatio, 11 * heightRatio));
@@ -215,7 +219,6 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
                                         11 * widthRatio, 5 * widthRatio, tiki));
                 }
 
-                String content = "- Sách, văn hoá phẩm và văn phòng phẩm";
 
                 instance.sendcommand(String.format(Locale.US, "QRCODE %f,%f,H,%f,M,0,M2 ,\"S%s\"\n", 60 * widthRatio,
                                 50 * heightRatio, 8 * widthRatio, a.getString("deliveryId")));
@@ -272,7 +275,7 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
                                 60 * widthRatio, 800 * heightRatio, 11 * heightRatio, 11 * heightRatio));
 
                 instance.sendcommand(String.format(Locale.US,
-                                "TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"Nội dung hàng hoá: \" \n ", 60 * widthRatio,
+                                "TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\""+noteTitle+" \" \n ", 60 * widthRatio,
                                 950 * heightRatio, 10 * heightRatio, 10 * heightRatio));
 
                 instance.sendcommand(String.format(Locale.US,
