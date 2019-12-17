@@ -204,7 +204,7 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
                 String content = "- Sách, văn hoá phẩm và văn phòng phẩm";
                 String noteTitle = "Nội dung hàng hoá:";
                 Integer noteWidth =( tiki!=null? 238:500);
-
+                String specialDate = a.getString("sDate");
 
                 if(tiki!=null){
                         content = "- Note: Nhà bán hàng FAHASA trên TIKI";
@@ -217,6 +217,9 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
                                         "BLOCK %f,%f,%f,%f,\"TAHOMA.TTF\",0,%f,%f,%f,0,1,\"%s\" \n ", 520 * widthRatio,
                                         840 * heightRatio, 380 * widthRatio, 60 * heightRatio, 11 * widthRatio,
                                         11 * widthRatio, 5 * widthRatio, tiki));
+                } else if (specialDate!=null){
+                        noteTitle = "Ghi chú giao hàng:";
+                        content = "16h00 - 21h00 ngày " + specialDate;
                 }
 
 
