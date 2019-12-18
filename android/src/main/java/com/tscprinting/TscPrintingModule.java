@@ -17,6 +17,7 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
         static Double heightRatio = 1.0;
         static Double widthRatio = 1.0;
         static Double numLabel = 4.0;
+        static Boolean _isBookstore = false;
 
         public TscPrintingModule(ReactApplicationContext reactContext) {
                 super(reactContext);
@@ -100,7 +101,7 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 
                                 instance.sendcommand(String.format(Locale.US, "BOX %f,%f,%f,%f,12,10\n", 12 * wRatio,
                                                 x * hRatio, 790 * wRatio, y * hRatio));
-                                if (hasArrow) {
+                                if (hasArrow&&!_isBookstore) {
                                         instance.sendcommand(String.format(Locale.US, "PUTBMP %f,%f,\"%s\"\n",
                                                         30 * wRatio, text * hRatio - 20, "arrowup.bmp"));
                                 }
@@ -122,7 +123,8 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
         }
 
         @ReactMethod
-        public void printShelf(ReadableMap config, ReadableMap data, Promise promise) {
+        public void printShelf(ReadableMap config, ReadableMap data,Boolean isBookstore, Promise promise) {
+                _isBookstore = isBookstore;
                 final TscWifiActivity instance = new TscWifiActivity();
                 final ReadableMap config2 = config;
                 final ReadableMap data2 = data;
