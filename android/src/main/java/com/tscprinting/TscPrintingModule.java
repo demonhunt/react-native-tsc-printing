@@ -205,7 +205,7 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
                 String tiki = a.getString("tikiOrderId");
                 String content = "- Sách, văn hoá phẩm và văn phòng phẩm";
                 String noteTitle = "Nội dung hàng hoá:";
-                Integer noteWidth =( tiki!=null? 238:500);
+                Integer noteWidth =( tiki!=null? 238:310);
                 String specialDate = a.getString("sDate");
 
                 if(tiki!=null){
@@ -319,7 +319,7 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
                 
 
                 instance.sendcommand(String.format(Locale.US,
-                                "BLOCK %f,%f,%f,%f,\"TAHOMA.TTF\",0,%f,%f,%f,0,1,\"%s\"\n ", 220 * widthRatio,
+                                "BLOCK %f,%f,%f,%f,\"TAHOMA.TTF\",0,%f,%f,%f,0,1,\"%s\"\n ", 170 * widthRatio,
                                 800 * heightRatio, noteWidth * widthRatio, 120 * heightRatio, 10 * widthRatio,
                                 10 * widthRatio, 5 * widthRatio, a.getString("note")));
 
