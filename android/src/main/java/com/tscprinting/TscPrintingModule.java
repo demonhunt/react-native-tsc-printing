@@ -231,8 +231,8 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
                 // Block VAT
                 if(requireVAT.equals("1")){        
 
-                        instance.sendcommand(String.format(Locale.US, "TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"HOÁ ĐƠN VAT \" \n ", 
-                                        60 * widthRatio, 695 * heightRatio, 20 * heightRatio, 20 * heightRatio));
+                        instance.sendcommand(String.format(Locale.US, "TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"ĐÃ NHẬN ĐỦ HOÁ ĐƠN VAT\" \n ", 
+                                        60 * widthRatio, 695 * heightRatio, 17 * heightRatio, 17 * heightRatio));
 
                 }
 
