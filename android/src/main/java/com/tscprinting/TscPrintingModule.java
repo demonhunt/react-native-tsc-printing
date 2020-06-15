@@ -232,7 +232,7 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
                 if(requireVAT.equals("1")){        
 
                         instance.sendcommand(String.format(Locale.US, "TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"ĐÃ NHẬN ĐỦ HOÁ ĐƠN VAT\" \n ", 
-                                        60 * widthRatio, 695 * heightRatio, 17 * heightRatio, 17 * heightRatio));
+                                        60 * widthRatio, 695 * heightRatio, 12 * heightRatio, 12 * heightRatio));
 
                 }
 
