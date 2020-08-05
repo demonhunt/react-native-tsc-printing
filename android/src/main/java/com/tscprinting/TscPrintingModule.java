@@ -235,10 +235,21 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
                                         60 * widthRatio, 695 * heightRatio, 12 * heightRatio, 12 * heightRatio));
 
                 }
-
-
-                instance.sendcommand(String.format(Locale.US, "QRCODE %f,%f,H,%f,M,0,M2 ,\"S%s\"\n", 60 * widthRatio,
+                
+                Boolean useBarcode = false ;
+                try {
+                        useBarcode = a.getBoolean("useBarcode");      
+                } catch (Exception e) {
+                        useBarcode = false;
+                } finally {
+                        if(useBarcode){
+                                instance.sendcommand(String.format(Locale.US, "BARCODE %f,%f,\"128\",%f,2,0,1.8,2,\"%s\"\n", 60 * widthRatio,
+                                50 * heightRatio, 250 * heightRatio, a.getString("deliveryId")));
+                        } else {
+                                instance.sendcommand(String.format(Locale.US, "QRCODE %f,%f,H,%f,M,0,M2 ,\"S%s\"\n", 60 * widthRatio,
                                 50 * heightRatio, 10 * widthRatio, a.getString("deliveryId")));
+                        }
+                }
 
                 instance.sendcommand(String.format(Locale.US, "QRCODE %f,%f,H,%f,M,0,M2 ,\"S%s\"\n", 520 * widthRatio,
                                 870 * heightRatio, 10 * widthRatio, a.getString("orderId").replace("_", "")));
