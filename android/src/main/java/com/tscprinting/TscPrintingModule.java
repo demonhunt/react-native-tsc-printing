@@ -213,21 +213,6 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 
                 String requireVAT = a.getString("requireVAT");
 
-                if(tiki!=null||lzd!=null){
-                        content = "- Note: Nhà bán hàng FAHASA trên " + nameProvider;
-                        noteTitle = "Ghi chú giao hàng:";
-                        instance.sendcommand(String.format(Locale.US,
-                                        "TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"Mã đơn " + nameProvider + ": \" \n ", 330 * widthRatio,
-                                        295 * heightRatio, 10 * heightRatio, 10 * heightRatio));
-
-                        instance.sendcommand(String.format(Locale.US,
-                                        "BLOCK %f,%f,%f,%f,\"TAHOMA.TTF\",0,%f,%f,%f,0,1,\"%s\" \n ", 510 * widthRatio,
-                                        295 * heightRatio, 380 * widthRatio, 60 * heightRatio, 9 * widthRatio,
-                                        9 * widthRatio, 5 * widthRatio, tiki!=null?tiki:lzd));
-                } else if (specialDate!=null){
-                        noteTitle = "Ghi chú giao hàng:";
-                        content = "16h00 - 21h00 ngày " + specialDate;
-                }
                 // Block VAT
                 if(requireVAT.equals("1")){        
 
@@ -235,36 +220,53 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
                                         60 * widthRatio, 695 * heightRatio, 12 * heightRatio, 12 * heightRatio));
 
                 }
-                
+
                 Boolean useBarcode = false ;
                 try {
-                        useBarcode = a.getBoolean("useBarcode");      
+                        useBarcode = a.getBoolean("useBarcode");
+                        
                 } catch (Exception e) {
                         useBarcode = false;
                 } finally {
                         if(useBarcode){
-                                instance.sendcommand(String.format(Locale.US, "BARCODE %f,%f,\"128\",%f,2,0,1.8,2,\"%s\"\n", 60 * widthRatio,
-                                50 * heightRatio, 250 * heightRatio, a.getString("deliveryId")));
+                                instance.sendcommand(String.format(Locale.US, "BARCODE %f,%f,\"128\",%f,2,0,2,2,\"%s\"\n", 60 * widthRatio,
+                        50 * heightRatio, 250 * heightRatio, a.getString("deliveryId")));
                         } else {
                                 instance.sendcommand(String.format(Locale.US, "QRCODE %f,%f,H,%f,M,0,M2 ,\"S%s\"\n", 60 * widthRatio,
                                 50 * heightRatio, 10 * widthRatio, a.getString("deliveryId")));
                         }
                 }
+               
 
                 instance.sendcommand(String.format(Locale.US, "QRCODE %f,%f,H,%f,M,0,M2 ,\"S%s\"\n", 520 * widthRatio,
                                 870 * heightRatio, 10 * widthRatio, a.getString("orderId").replace("_", "")));
 
                 instance.sendcommand(String.format(Locale.US, "TEXT %f,%f,\"TAHOMA.TTF\",0,%f,%f,1,\"%s\" \n ",
-                                330 * widthRatio, 135 * heightRatio, 10 * heightRatio, 10 * heightRatio,
+                                400 * widthRatio, 135 * heightRatio, 10 * heightRatio, 10 * heightRatio,
                                 a.getString("date")));
 
                 instance.sendcommand(String.format(Locale.US, "TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"%s\" \n ",
-                                330 * widthRatio, 175 * heightRatio, 10 * heightRatio, 10 * heightRatio,
+                                400 * widthRatio, 175 * heightRatio, 10 * heightRatio, 10 * heightRatio,
                                 a.getString("orderId")));
 
                 instance.sendcommand(String.format(Locale.US, "TEXT %f,%f,\"TAHOMA.TTF\",0,%f,%f,1,\"%s\" \n ",
-                                330 * widthRatio, 215 * heightRatio, 25 * heightRatio, 25 * heightRatio,
+                                400 * widthRatio, 215 * heightRatio, 25 * heightRatio, 25 * heightRatio,
                                 a.getString("deliveryPartner")));
+                if(tiki!=null||lzd!=null){
+                        content = "- Note: Nhà bán hàng FAHASA trên " + nameProvider;
+                        noteTitle = "Ghi chú giao hàng:";
+                        instance.sendcommand(String.format(Locale.US,
+                                        "TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"Mã đơn " + nameProvider + ": \" \n ", 400 * widthRatio,
+                                        295 * heightRatio, 10 * heightRatio, 10 * heightRatio));
+
+                        instance.sendcommand(String.format(Locale.US,
+                                        "BLOCK %f,%f,%f,%f,\"TAHOMA.TTF\",0,%f,%f,%f,0,1,\"%s\" \n ", 580 * widthRatio,
+                                        295 * heightRatio, 310 * widthRatio, 60 * heightRatio, 9 * widthRatio,
+                                        9 * widthRatio, 5 * widthRatio, tiki!=null?tiki:lzd));
+                } else if (specialDate!=null){
+                        noteTitle = "Ghi chú giao hàng:";
+                        content = "16h00 - 21h00 ngày " + specialDate;
+                }
 
                 // instance.sendcommand(String.format(Locale.US,
                 //                 "TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"Người nhận:   \" \n ", 330 * widthRatio,
@@ -368,7 +370,7 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
                 String ninja = widthRatio >= 1 ? "ninjabig.bmp" : "ninjasmall.bmp";
                 String kerry = widthRatio >= 1 ? "kerrybig.bmp" : "kerrysmall.bmp";
 
-                instance.sendcommand(String.format(Locale.US, "PUTBMP %f,%f,\"%s\"\n", 330 * widthRatio,
+                instance.sendcommand(String.format(Locale.US, "PUTBMP %f,%f,\"%s\"\n", 400 * widthRatio,
                                 55 * heightRatio, fHeader));
 
                 Boolean hasLogo = a.getBoolean("hasLogo");
