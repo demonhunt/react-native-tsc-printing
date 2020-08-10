@@ -230,16 +230,16 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
                 } finally {
                         if(useBarcode){
                                 instance.sendcommand(String.format(Locale.US, "BARCODE %f,%f,\"128\",%f,2,0,2,2,\"%s\"\n", 60 * widthRatio,
-                        50 * heightRatio, 250 * heightRatio, a.getString("deliveryId")));
+                                50 * heightRatio, 250 * heightRatio, a.getString("deliveryId")));
                         } else {
-                                instance.sendcommand(String.format(Locale.US, "QRCODE %f,%f,H,%f,M,0,M2 ,\"S%s\"\n", 60 * widthRatio,
-                                50 * heightRatio, 10 * widthRatio, a.getString("deliveryId")));
+                                instance.sendcommand(String.format(Locale.US, "QRCODE %f,%f,H,%f,M,0,M2 ,\"S%s\"\n", 76 * widthRatio,
+                                66 * heightRatio, 10 * widthRatio, a.getString("deliveryId")));
                         }
                 }
                
 
-                instance.sendcommand(String.format(Locale.US, "QRCODE %f,%f,H,%f,M,0,M2 ,\"S%s\"\n", 520 * widthRatio,
-                                870 * heightRatio, 10 * widthRatio, a.getString("orderId").replace("_", "")));
+                instance.sendcommand(String.format(Locale.US, "QRCODE %f,%f,H,%f,M,0,M2 ,\"S%s\"\n", 504 * widthRatio,
+                                853 * heightRatio, 10 * widthRatio, a.getString("orderId").replace("_", "")));
 
                 instance.sendcommand(String.format(Locale.US, "TEXT %f,%f,\"TAHOMA.TTF\",0,%f,%f,1,\"%s\" \n ",
                                 400 * widthRatio, 135 * heightRatio, 10 * heightRatio, 10 * heightRatio,
@@ -274,32 +274,32 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 
                 instance.sendcommand(String.format(Locale.US,
                                 "BLOCK %f,%f,%f,%f,\"TAHOMA.TTF\",0,%f,%f,%f,0,1,\"%s\" \n ", 60 * widthRatio,
-                                370 * heightRatio, 255 * widthRatio, 50 * heightRatio, 11 * heightRatio,
+                                390 * heightRatio, 255 * widthRatio, 50 * heightRatio, 11 * heightRatio,
                                 11 * heightRatio, 5 * widthRatio, a.getString("shippingName")));                                
 
                 // instance.sendcommand(String.format(Locale.US, "TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"SĐT:    \" \n ",
                 //                 330 * widthRatio, 295 * heightRatio, 11 * heightRatio, 11 * heightRatio));
 
                 instance.sendcommand(String.format(Locale.US, "TEXT %f,%f,\"TAHOMA.TTF\",0,%f,%f,1,\"%s\" \n ",
-                                350 * widthRatio, 370 * heightRatio, 11 * heightRatio, 11 * heightRatio,
+                                350 * widthRatio, 390 * heightRatio, 11 * heightRatio, 11 * heightRatio,
                                 a.getString("shippingPhone")));
 
                 instance.sendcommand(String.format(Locale.US, "TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"Địa chỉ:\" \n ",
-                                60 * widthRatio, 410 * heightRatio, 10 * heightRatio, 10 * heightRatio));
+                                60 * widthRatio, 430 * heightRatio, 10 * heightRatio, 10 * heightRatio));
 
 
                 instance.sendcommand(String.format(Locale.US,
                                 "BLOCK %f,%f,%f,%f,\"TAHOMA.TTF\",0,%f,%f,%f,0,1,\"%s\"\n ", 60 * widthRatio,
-                                450 * heightRatio, 400 * widthRatio, 180 * heightRatio, 10 * widthRatio,
+                                470 * heightRatio, 400 * widthRatio, 180 * heightRatio, 10 * widthRatio,
                                 10 * widthRatio, 5 * widthRatio, a.getString("shippingStreet")));
 
                 instance.sendcommand(String.format(Locale.US,
                                 "TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"Huyện/ Xã: \" \n ", 520 * widthRatio,
-                                370 * heightRatio, 11 * heightRatio, 11 * heightRatio));
+                                390 * heightRatio, 11 * heightRatio, 11 * heightRatio));
 
                 instance.sendcommand(String.format(Locale.US,
                                 "BLOCK %f,%f,%f,%f,\"TAHOMA.TTF\",0,%f,%f,%f,0,1,\"%s\" \n ", 520 * widthRatio,
-                                400 * heightRatio, 380 * widthRatio, 60 * heightRatio, 9 * widthRatio, 9 * widthRatio,
+                                420 * heightRatio, 380 * widthRatio, 60 * heightRatio, 9 * widthRatio, 9 * widthRatio,
                                 5 * widthRatio, a.getString("ward")));
 
 
@@ -415,21 +415,21 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
                                 32 * heightRatio, 790 * widthRatio, 1185 * heightRatio));
 
                 instance.sendcommand(String.format(Locale.US, "DIAGONAL %f,%f,%f,%f,4\n", 42 * widthRatio,
-                                355 * heightRatio, 790 * widthRatio, 355 * heightRatio));
-                instance.sendcommand(String.format(Locale.US, "DIAGONAL %f,%f,%f,%f,4\n", 500 * widthRatio,
+                                375 * heightRatio, 790 * widthRatio, 375 * heightRatio));
+                instance.sendcommand(String.format(Locale.US, "DIAGONAL %f,%f,%f,%f,4\n", 485 * widthRatio,
                                 490.5 * heightRatio, 790 * widthRatio, 490.5 * heightRatio));
                 instance.sendcommand(String.format(Locale.US, "DIAGONAL %f,%f,%f,%f,4\n", 42 * widthRatio,
                                 626 * heightRatio, 790 * widthRatio, 626 * heightRatio));
-                instance.sendcommand(String.format(Locale.US, "DIAGONAL %f,%f,%f,%f,4\n", 500 * widthRatio,
-                                355 * heightRatio, 500 * widthRatio, 1185 * heightRatio));
+                instance.sendcommand(String.format(Locale.US, "DIAGONAL %f,%f,%f,%f,4\n", 485 * widthRatio,
+                                375 * heightRatio, 485 * widthRatio, 1185 * heightRatio));
                 instance.sendcommand(String.format(Locale.US, "DIAGONAL %f,%f,%f,%f,4\n", 42 * widthRatio,
-                                930 * heightRatio, 500 * widthRatio, 930 * heightRatio));
+                                930 * heightRatio, 485 * widthRatio, 930 * heightRatio));
                 instance.sendcommand(String.format(Locale.US, "DIAGONAL %f,%f,%f,%f,4\n", 42 * widthRatio,
                                 761.5 * heightRatio, 790 * widthRatio, 761.5 * heightRatio));
 
                 if (a.getString("tikiOrderId") != null) {
-                        instance.sendcommand(String.format(Locale.US, "DIAGONAL %f,%f,%f,%f,4\n", 500 * widthRatio,
-                                        780 * heightRatio, 500 * widthRatio, 930 * heightRatio));
+                        instance.sendcommand(String.format(Locale.US, "DIAGONAL %f,%f,%f,%f,4\n", 485 * widthRatio,
+                                        780 * heightRatio, 485 * widthRatio, 930 * heightRatio));
                 }
 
         }
