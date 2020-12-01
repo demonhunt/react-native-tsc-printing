@@ -202,13 +202,12 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
 
         public void printContentLabel(TscWifiActivity instance, ReadableMap a) throws Exception {
         
-                String tiki = a.getString("tikiOrderId");
-                String lzd = a.getString("lzdOrderId");
-                String nameProvider = tiki==null?"Lazada" : "Tiki";
+                String partnerCode = a.getString("partnerCode");
+                String partnerName = a.getString("partnerName");
 
                 String content = "- Sách, văn hoá phẩm và văn phòng phẩm";
                 String noteTitle = "Nội dung hàng hoá:";
-                Integer noteWidth =( tiki!=null&&lzd!=null? 238:310);
+                Integer noteWidth =( partnerName != null && partnerCode != null? 238:310);
                 String specialDate = a.getString("sDate");
 
                 String requireVAT = a.getString("requireVAT");
@@ -252,17 +251,17 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
                 instance.sendcommand(String.format(Locale.US, "TEXT %f,%f,\"TAHOMA.TTF\",0,%f,%f,1,\"%s\" \n ",
                                 400 * widthRatio, 215 * heightRatio, 25 * heightRatio, 25 * heightRatio,
                                 a.getString("deliveryPartner")));
-                if(tiki!=null||lzd!=null){
-                        content = "- Note: Nhà bán hàng FAHASA trên " + nameProvider;
+                if(partnerName != null && partnerCode != null){
+                        content = "- Note: Nhà bán hàng FAHASA trên " + partnerName;
                         noteTitle = "Ghi chú giao hàng:";
                         instance.sendcommand(String.format(Locale.US,
-                                        "TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"Mã đơn " + nameProvider + ": \" \n ", 400 * widthRatio,
+                                        "TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"Mã đơn " + partnerName + ": \" \n ", 400 * widthRatio,
                                         295 * heightRatio, 10 * heightRatio, 10 * heightRatio));
 
                         instance.sendcommand(String.format(Locale.US,
                                         "BLOCK %f,%f,%f,%f,\"TAHOMA.TTF\",0,%f,%f,%f,0,1,\"%s\" \n ", 580 * widthRatio,
                                         295 * heightRatio, 310 * widthRatio, 60 * heightRatio, 9 * widthRatio,
-                                        9 * widthRatio, 5 * widthRatio, tiki!=null?tiki:lzd));
+                                        9 * widthRatio, 5 * widthRatio, partnerCode));
                 } else if (specialDate!=null){
                         noteTitle = "Ghi chú giao hàng:";
                         content = "16h00 - 21h00 ngày " + specialDate;
@@ -426,11 +425,5 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
                                 930 * heightRatio, 485 * widthRatio, 930 * heightRatio));
                 instance.sendcommand(String.format(Locale.US, "DIAGONAL %f,%f,%f,%f,4\n", 42 * widthRatio,
                                 761.5 * heightRatio, 790 * widthRatio, 761.5 * heightRatio));
-
-                if (a.getString("tikiOrderId") != null) {
-                        instance.sendcommand(String.format(Locale.US, "DIAGONAL %f,%f,%f,%f,4\n", 485 * widthRatio,
-                                        780 * heightRatio, 485 * widthRatio, 930 * heightRatio));
-                }
-
         }
 }
