@@ -145,6 +145,35 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
                 }).start();
         }
 
+        @ReactMethod
+        public void printSampleHC(ReadableMap config, ReadableMap data, Promise promise) {
+                
+                final TscWifiActivity instance = new TscWifiActivity();
+                final ReadableMap config2 = config;
+                final ReadableMap data2 = data;
+                final Promise promise2 = promise;
+                new Thread(new Runnable() {
+                        public void run() {
+                                try {
+                                        prepareLabel(instance, config2);
+
+                                        instance.sendcommand(String.format(Locale.US, "BOX %f,%f,%f,%f,8,10\n", 42 * widthRatio,
+                                        32 * heightRatio, 790 * widthRatio, 1185 * heightRatio));
+                                        
+                                        instance.sendcommand(String.format(Locale.US, "BARCODE %f,%f,\"128\",%f,2,90,6,2,\"%s\"\n", 700 * widthRatio,
+                                        100 * heightRatio, 400 * heightRatio, data2.getString("data")));
+                                        instance.sendcommand("PRINT 1,1\n");
+                                        promise2.resolve("success2");
+
+                                } catch (Exception e) {
+                                        promise2.reject(e);
+                                }
+                                instance.sendcommand("CLS\n");
+                                instance.closeport(5000);
+                        }
+                }).start();
+        }
+
         public void initializeShelf(TscWifiActivity instance, ReadableMap data) throws Exception {
                 if (heightRatio < 1) {
                         numLabel = 3.0;
@@ -209,7 +238,8 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
                 String noteTitle = "Nội dung hàng hoá:";
                 Integer noteWidth =( partnerName != null && partnerCode != null? 238:310);
                 String specialDate = a.getString("sDate");
-
+                Integer fontSizeNote= 10;
+                String fontContent = "TAHOMA.TTF";
                 String requireVAT = a.getString("requireVAT");
 
                 // Block VAT
@@ -266,6 +296,20 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
                         noteTitle = "Ghi chú giao hàng:";
                         content = "16h00 - 21h00 ngày " + specialDate;
                 }
+
+                try {
+                        if(a.getString("eventDeliveryDate")!= null){
+                                content = " Hẹn ngày giao:  " + a.getString("eventDeliveryDate");
+                                noteTitle = "";    
+                                fontSizeNote = 15;
+                                fontContent = "TAHOMAB.TTF";
+
+                        }
+                } catch (Exception e) {
+                        //TODO: handle exception
+                }
+
+
 
                 // instance.sendcommand(String.format(Locale.US,
                 //                 "TEXT %f,%f,\"TAHOMAB.TTF\",0,%f,%f,1,\"Người nhận:   \" \n ", 330 * widthRatio,
@@ -352,9 +396,9 @@ public class TscPrintingModule extends ReactContextBaseJavaModule {
                 //                 10 * widthRatio, 5 * widthRatio, "flksdjflkj lksdjf lsdjfl jsdlf jsdlfjlksd jfald fjasdjf lasdhf lksadhf klsadhflkasd hfklasdh kflsdahfk sadlf jlhfdla ad hdf"));
 
                 instance.sendcommand(String.format(Locale.US,
-                                "BLOCK %f,%f,%f,%f,\"TAHOMA.TTF\",0,%f,%f,%f,0,1,\"%s\"\n ", 60 * widthRatio,
-                                1000 * heightRatio, 450 * widthRatio, 200 * heightRatio, 10 * widthRatio,
-                                10 * widthRatio, 5 * widthRatio, content));
+                                "BLOCK %f,%f,%f,%f,\"%s\",0,%f,%f,%f,0,1,\"%s\"\n ", 60 * widthRatio,
+                                1000 * heightRatio, 450 * widthRatio, 200 * heightRatio,fontContent, fontSizeNote * widthRatio,
+                                fontSizeNote * widthRatio, 5 * widthRatio, content));
 
                 String dPartner = a.getString("deliveryPartner");
 
